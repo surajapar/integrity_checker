@@ -214,7 +214,7 @@ Fork the repo, create a feature branch, and open a Pull Request.
 
 ## 📬 Contact <a id="contact"></a>
 
-Maintainer: [Suraj Apar](https://github.com/surajapar)  
-For issues, please open an [issue on GitHub](https://github.com/surajapar).
-
-
+**Name**: Suraj Apar  
+**Email**: [Email](aparsuraj@gmail.com)  
+**LinkedIn**: [LinkedIn](https://www.linkedin.com/in/surajapar)  
+**TryHackMe**: [TryHackMe](https://tryhackme.com/p/surajapar)
