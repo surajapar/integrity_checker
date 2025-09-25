@@ -1,84 +1,222 @@
-Unified File and Directory Integrity Checker
-Project Overview
-This is a versatile command-line tool for performing cryptographic integrity checks on files and directories. Implemented as a single Bash script, it provides a simple yet powerful solution for detecting unauthorized changes, verifying downloaded files, and ensuring data security. The tool is designed to be user-friendly, with clear command-line arguments and support for multiple hashing algorithms.
+# 🛡️ Unified File and Directory Integrity Checker
 
-Key Features
-Unified Functionality: Handles both single files and entire directories from one script.
+![Bash](https://img.shields.io/badge/shell-bash-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Status](https://img.shields.io/badge/status-stable-success)
 
-Multiple Modes:
+A versatile **command-line tool** for performing cryptographic integrity checks on files and directories. Implemented as a single **Bash script**, it provides a simple yet powerful solution for detecting unauthorized changes, verifying downloaded files, and ensuring data security.
 
-Baseline Generation: Creates a baseline of cryptographic hashes for a file or a directory.
+---
 
-Integrity Verification: Compares current file states against a saved baseline to detect changes.
+## 📚 Table of Contents
 
-Hash Verification: Verifies a downloaded file's integrity against a hash value provided by the source.
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+  - [Baseline Generation](#1-baseline-generation-baseline)
+  - [Integrity Verification](#2-integrity-verification-verify)
+  - [Hash Verification](#3-hash-verification-verify-hash)
+- [Help Section](#help-section)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-Cryptographic Security: Uses the secure SHA256 algorithm by default, with support for other algorithms like MD5 and SHA1.
+---
 
-Intuitive Interface: Utilizes simple command-line flags and arguments (-d, -a) for straightforward operation.
+## 📖 Project Overview
 
-Getting Started
-Prerequisites
-To run this script, you need a Linux environment with the following core utilities installed:
+This script is designed to be **user-friendly and secure**:
 
-Bash
+- Detects unauthorized changes to files/directories
+- Verifies downloaded files against trusted hash values
+- Supports multiple hashing algorithms
+- Provides a single, unified interface with intuitive flags and arguments
 
-sha256sum, sha1sum, md5sum
+---
 
-find, grep, awk, comm
+## ✅ Key Features
 
-Installation
-Save the script: Save the provided Bash script as intchk.sh.
+- **Unified Functionality**: One script for both file and directory integrity checks.  
+- **Multiple Modes**:
+  - **Baseline Generation** – create a baseline of cryptographic hashes.  
+  - **Integrity Verification** – compare current file states against the baseline.  
+  - **Hash Verification** – check a downloaded file against a known hash.  
+- **Cryptographic Security**: Defaults to `SHA256`, with optional support for `MD5` and `SHA1`.  
+- **Intuitive Interface**: Simple command-line arguments (`-d`, `-a`) for straightforward operation.  
 
-Make it executable:
+---
 
+## 🚀 Getting Started
+
+### 🔧 Prerequisites
+
+A Linux/Unix environment with the following tools installed:
+
+- `bash`
+- `sha256sum`, `sha1sum`, `md5sum`
+- `find`, `grep`, `awk`, `comm`
+
+### 📦 Installation
+
+Save the script as `intchk.sh`:
+
+```bash
 chmod +x intchk.sh
+```
 
-Usage
-The script uses the following format: intchk.sh [OPTIONS] [ACTION] <path> [hash_value]
+---
 
-1. Baseline Generation (baseline)
-Creates a hash file for a file or a directory.
+## 💻 Usage
 
-For a single file:
+The general syntax:
 
+```bash
+./intchk.sh [OPTIONS] [ACTION] <path> [hash_value]
+```
+
+### 1. Baseline Generation (`baseline`)
+
+Generate a hash file for future verification.
+
+**For a single file:**
+
+```bash
 ./intchk.sh baseline my_file.txt
+```
 
-This will create a my_file.txt.sha256 file.
+👉 Creates `my_file.txt.sha256`.
 
-For a directory: Use the -d or --directory flag.
+**For a directory (recursive):**
 
+```bash
 ./intchk.sh -d baseline my_directory/
+```
 
-This will create an integrity_hashes.sha256 file inside my_directory/.
+👉 Creates `integrity_hashes.sha256` inside `my_directory/`.
 
-2. Integrity Verification (verify)
-Checks files against a previously generated baseline.
+---
 
-For a single file:
+### 2. Integrity Verification (`verify`)
 
+Check files against a previously generated baseline.
+
+**For a single file:**
+
+```bash
 ./intchk.sh verify my_file.txt
+```
 
-Output: Integrity check: OK or Integrity check: MODIFIED.
+Output:
 
-For a directory:
+```txt
+Integrity check: OK
+# or
+Integrity check: MODIFIED
+```
 
+**For a directory:**
+
+```bash
 ./intchk.sh -d verify my_directory/
+```
 
-Output: All files OK. or Some files have been modified or are missing.
+Output:
 
-3. Hash Verification (verify-hash)
-Verifies a file against a hash value you provide. You can specify the algorithm with the -a flag.
+```txt
+All files OK.
+# or
+Some files have been modified or are missing.
+```
 
-Using default SHA256:
+---
 
+### 3. Hash Verification (`verify-hash`)
+
+Verify a file against a known hash value.  
+Default algorithm: **SHA256**.
+
+**Example:**
+
+```bash
 ./intchk.sh verify-hash downloaded_file.zip <provided_sha256_hash>
+```
 
 Using a different algorithm (e.g., MD5):
 
+```bash
 ./intchk.sh -a md5 verify-hash downloaded_file.zip <provided_md5_hash>
+```
 
-Help Section
-For a quick reference on all commands and options, run the help flag:
+---
 
+## 🆘 Help Section
+
+For a quick reference of all options:
+
+```bash
 ./intchk.sh -h
+```
+
+---
+
+## 📂 Examples
+
+### Generate baseline for project folder
+
+```bash
+./intchk.sh -d baseline ./project
+```
+
+Creates `./project/integrity_hashes.sha256`.
+
+---
+
+### Verify folder integrity later
+
+```bash
+./intchk.sh -d verify ./project
+```
+
+Example output:
+
+```txt
+File modified: ./project/config.json
+File deleted: ./project/old.log
+Integrity check summary: Some files have been modified or are missing.
+```
+
+---
+
+### Verify a downloaded ISO file
+
+```bash
+./intchk.sh verify-hash ubuntu.iso e5b72f8f09fbd3e8a1ad9fa4cd4f49bbac3b...
+```
+
+Output:
+
+```txt
+Integrity check: OK
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!  
+Fork the repo, create a feature branch, and open a Pull Request.
+
+---
+
+
+
+## 📬 Contact
+
+Maintainer: [Suraj Apar](https://github.com/surajapar)  
+For issues, please open an [issue on GitHub](https://github.com/surajapar).
+
+
