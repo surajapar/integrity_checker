@@ -21,7 +21,6 @@ A versatile **command-line tool** for performing cryptographic integrity checks 
 - [Help Section](#help-section)
 - [Examples](#examples)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ---
