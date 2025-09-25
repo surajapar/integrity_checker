@@ -1,7 +1,6 @@
 # 🛡️ Unified File and Directory Integrity Checker
 
 ![Bash](https://img.shields.io/badge/shell-bash-green)
-![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-stable-success)
 
 A versatile **command-line tool** for performing cryptographic integrity checks on files and directories. Implemented as a single **Bash script**, it provides a simple yet powerful solution for detecting unauthorized changes, verifying downloaded files, and ensuring data security.
@@ -27,7 +26,7 @@ A versatile **command-line tool** for performing cryptographic integrity checks 
 
 ---
 
-## 📖 Project Overview
+## 📖 Project Overview <a id="project-overview"></a>
 
 This script is designed to be **user-friendly and secure**:
 
@@ -38,7 +37,7 @@ This script is designed to be **user-friendly and secure**:
 
 ---
 
-## ✅ Key Features
+## ✅ Key Features <a id="key-features"></a>
 
 - **Unified Functionality**: One script for both file and directory integrity checks.  
 - **Multiple Modes**:
@@ -50,9 +49,9 @@ This script is designed to be **user-friendly and secure**:
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Getting Started <a id="getting-started"></a>
 
-### 🔧 Prerequisites
+### 🔧 Prerequisites <a id="prerequisites"></a>
 
 A Linux/Unix environment with the following tools installed:
 
@@ -60,7 +59,7 @@ A Linux/Unix environment with the following tools installed:
 - `sha256sum`, `sha1sum`, `md5sum`
 - `find`, `grep`, `awk`, `comm`
 
-### 📦 Installation
+### 📦 Installation <a id="installation"></a>
 
 Save the script as `intchk.sh`:
 
@@ -70,7 +69,7 @@ chmod +x intchk.sh
 
 ---
 
-## 💻 Usage
+## 💻 Usage <a id="usage"></a>
 
 The general syntax:
 
@@ -78,7 +77,7 @@ The general syntax:
 ./intchk.sh [OPTIONS] [ACTION] <path> [hash_value]
 ```
 
-### 1. Baseline Generation (`baseline`)
+### 1. Baseline Generation (`baseline`) <a id="1-baseline-generation-baseline"></a>
 
 Generate a hash file for future verification.
 
@@ -100,7 +99,7 @@ Generate a hash file for future verification.
 
 ---
 
-### 2. Integrity Verification (`verify`)
+### 2. Integrity Verification (`verify`) <a id="2-integrity-verification-verify"></a>
 
 Check files against a previously generated baseline.
 
@@ -134,7 +133,7 @@ Some files have been modified or are missing.
 
 ---
 
-### 3. Hash Verification (`verify-hash`)
+### 3. Hash Verification (`verify-hash`) <a id="3-hash-verification-verify-hash"></a>
 
 Verify a file against a known hash value.  
 Default algorithm: **SHA256**.
@@ -153,7 +152,7 @@ Using a different algorithm (e.g., MD5):
 
 ---
 
-## 🆘 Help Section
+## 🆘 Help Section <a id="help-section"></a>
 
 For a quick reference of all options:
 
@@ -163,7 +162,7 @@ For a quick reference of all options:
 
 ---
 
-## 📂 Examples
+## 📂 Examples <a id="examples"></a>
 
 ### Generate baseline for project folder
 
@@ -205,7 +204,7 @@ Integrity check: OK
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contributing <a id="contributing"></a>
 
 Contributions are welcome!  
 Fork the repo, create a feature branch, and open a Pull Request.
@@ -214,7 +213,7 @@ Fork the repo, create a feature branch, and open a Pull Request.
 
 
 
-## 📬 Contact
+## 📬 Contact <a id="contact"></a>
 
 Maintainer: [Suraj Apar](https://github.com/surajapar)  
 For issues, please open an [issue on GitHub](https://github.com/surajapar).
