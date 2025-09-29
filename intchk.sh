@@ -116,7 +116,10 @@ generate_dir_baseline() {
         echo "Error: Directory '$TARGET_PATH' not found."
         exit 1
     fi
-    find "$TARGET_PATH" -type f -print0 | xargs -0 $HASH_TOOL > "$HASH_FILE" 2>/dev/null
+    # Exclude the baseline file itself and store relative paths
+    (cd "$TARGET_PATH" && \
+     find . -type f ! -name "integrity_hashes.${ALGORITHM}" -printf '%P\0' | \
+     xargs -0 $HASH_TOOL) > "$HASH_FILE"
     if [ ! -s "$HASH_FILE" ]; then
         echo "Error: Failed to write baseline. Check permissions."
         exit 1
@@ -132,7 +135,9 @@ verify_dir_integrity() {
         echo "Error: Baseline '$HASH_FILE' not found. Run baseline first."
         exit 1
     fi
-    if $HASH_TOOL -c "$HASH_FILE" >/dev/null 2>&1; then
+    # Run verification inside the target dir
+    (cd "$TARGET_PATH" && $HASH_TOOL -c "$(basename "$HASH_FILE")") >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
         echo "All files OK."
     else
         echo "Some files modified or missing."
